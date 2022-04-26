@@ -72,6 +72,6 @@ if __name__ == '__main__':
     )
 
     logger.log_info('Strating training.')
-    acc, loss, plt = trainer.valid_epoch()
+    acc, plt = trainer.valid_epoch()
     logger.log_info('Accuracy: {}'.format(acc))
 
