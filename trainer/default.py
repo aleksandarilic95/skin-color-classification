@@ -1,6 +1,5 @@
 from logger.default import Logger
 import torch
-from metrics.map import mean_average_precision
 import torchvision
 import pandas as pd
 import numpy as np
