@@ -72,7 +72,6 @@ class Trainer:
 
                 correct += (preds == targets).sum()
                 total += targets.shape[0]
-                running_loss.append(loss.mean().item())
 
                 for t, p in zip(targets.view(-1), preds.view(-1)):
                     confusion_matrix[t.long(), p.long()] += 1
