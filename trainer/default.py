@@ -51,6 +51,7 @@ class Trainer:
         total = 0
         correct = 0
         running_loss = []
+
         class_names = [
             'White', 
             'Black', 
@@ -60,6 +61,7 @@ class Trainer:
             'Middle Eastern'
         ]
         nb_classes = len(class_names)
+
         confusion_matrix = np.zeros((nb_classes, nb_classes))
 
         with torch.no_grad():
@@ -78,8 +80,6 @@ class Trainer:
                     confusion_matrix[t.long(), p.long()] += 1
 
         plt.figure(figsize=(15,10))
-
-        
 
         df_cm = pd.DataFrame(confusion_matrix, index=class_names, columns=class_names).astype(int)
         heatmap = sns.heatmap(df_cm, annot=True, fmt="d")
