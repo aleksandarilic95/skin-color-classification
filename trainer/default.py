@@ -72,7 +72,6 @@ class Trainer:
 
                 correct += (preds == targets).sum()
                 total += targets.shape[0]
-                loss = self.criterion(outputs, targets)
                 running_loss.append(loss.mean().item())
 
                 for t, p in zip(targets.view(-1), preds.view(-1)):
@@ -89,16 +88,14 @@ class Trainer:
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
 
-        running_loss = sum(running_loss) / len(running_loss)
-
-        return correct / total, running_loss, plt
+        return correct / total, plt
 
 
     def train(self):
         for epoch in range(self.num_of_epochs):
             self.logger.log_info('Starting training of epoch {}.'.format(epoch))
             self.train_epoch()
-            accuracy, loss, plt = self.valid_epoch()
+            accuracy, plt = self.valid_epoch()
             self.logger.log_info('Epoch {}: Accuracy: {} Loss: {}'.format(epoch, accuracy, loss))
             plt.savefig('out/figure{}.png'.format(epoch + 1))
             torch.save(self.model.state_dict(), 'out/model{}.pt'.format(epoch + 1))
